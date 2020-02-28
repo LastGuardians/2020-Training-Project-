@@ -16,8 +16,7 @@ bool SocketObj::InitSocket()
 	WSADATA wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	
+	_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);	
 	if (INVALID_SOCKET == _socket)
 	{
 		CloseSocket();
@@ -35,7 +34,6 @@ bool SocketObj::Bind()
 	listenAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	int ret = ::bind(_socket, (SOCKADDR*)&listenAddr, sizeof(listenAddr));
-
 	if (SOCKET_ERROR == ret)
 	{
 		CloseSocket();
@@ -48,7 +46,6 @@ bool SocketObj::Bind()
 bool SocketObj::Listen()
 {
 	int ret = listen(_socket, SOMAXCONN);
-
 	if (SOCKET_ERROR == ret || INVALID_SOCKET == _socket)
 	{
 		CloseSocket();
@@ -61,11 +58,12 @@ bool SocketObj::Listen()
 void SocketObj::CloseSocket()
 {
 	closesocket(_socket);
+	_socket = INVALID_SOCKET;
 	std::cout << "socket close." << std::endl;
 	WSACleanup();
 }
 
-SOCKET* SocketObj::Accept()
+SOCKET SocketObj::Accept()
 {
 	SOCKADDR_IN acceptAddr;
 	int addrsize = sizeof(acceptAddr);
@@ -73,9 +71,9 @@ SOCKET* SocketObj::Accept()
 	_acceptsocket = accept(_socket, (sockaddr*)&acceptAddr, &addrsize);
 	if (INVALID_SOCKET == _acceptsocket)
 	{
-		return nullptr;
+		return NULL;
 	}
 
-	return &_acceptsocket;
+	return _acceptsocket;
 }
 

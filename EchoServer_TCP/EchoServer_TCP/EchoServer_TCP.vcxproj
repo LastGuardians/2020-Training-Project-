@@ -123,10 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseServer.cpp" />
     <ClCompile Include="ServerMain.cpp" />
     <ClCompile Include="SocketObj.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseServer.h" />
     <ClInclude Include="ServerMain.h" />
     <ClInclude Include="SocketObj.h" />
   </ItemGroup>

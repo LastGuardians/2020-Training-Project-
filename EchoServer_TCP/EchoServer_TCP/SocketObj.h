@@ -14,7 +14,7 @@ public:
 	bool Bind();
 	bool Listen();
 	void CloseSocket();
-	SOCKET* Accept();
+	SOCKET Accept();
 
 private:
 	SOCKET _socket;

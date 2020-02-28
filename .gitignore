@@ -4,3 +4,10 @@
 
 /.vs/2020-Training-Project-/v16/Browse.VC.opendb
 /.vs/2020-Training-Project-/v16/Browse.VC.db
+*.suo
+*.json
+/EchoServer_TCP/.vs/EchoServer_TCP/v16/Browse.VC.opendb
+/EchoServer_TCP/.vs/EchoServer_TCP/v16/Solution.VC.db-shm
+/EchoServer_TCP/.vs/EchoServer_TCP/v16/Solution.VC.db-wal
+/EchoServer_TCP/.vs/EchoServer_TCP/v16/ipch/AutoPCH/e3d5b0e80a673bea/SERVERMAIN.ipch
+/EchoServer_TCP/.vs/EchoServer_TCP/v16/ipch/AutoPCH/d5ca5b0d7005553c/BASESERVER.ipch
