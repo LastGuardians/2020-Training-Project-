@@ -11,3 +11,6 @@
 /EchoServer_TCP/.vs/EchoServer_TCP/v16/Solution.VC.db-wal
 /EchoServer_TCP/.vs/EchoServer_TCP/v16/ipch/AutoPCH/e3d5b0e80a673bea/SERVERMAIN.ipch
 /EchoServer_TCP/.vs/EchoServer_TCP/v16/ipch/AutoPCH/d5ca5b0d7005553c/BASESERVER.ipch
+/EchoServer_TCP/.vs/EchoServer_TCP/v16/ipch/AutoPCH/464986dc7ee80c7e/SOCKETOBJ.ipch
+/EchoServer_TCP/.vs/EchoServer_TCP/v16/ipch/AutoPCH/5b8db7d74e3b8da3/CLIENTMAIN.ipch
+/EchoServer_TCP/.vs/EchoServer_TCP/v16/ipch/AutoPCH/643fda69ddc1fc3e/GAMECLIENT.ipch

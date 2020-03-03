@@ -60,16 +60,16 @@ void BaseServer::AccpetThread()
 			cout << "Accept failed" << endl;			
 		}
 
-		cout << "clientid : " << clientid << " connect success" << endl;
+		cout << "clientid : " << clientid++ << " connect success" << endl;
 
-		char recvbuff[MAX_BUFF];
+		/*char recvbuff[MAX_BUFF];
 		int recvlen;
 
 		if (::recv(_mSocket, recvbuff, MAX_BUFF, 0))
 		{
 			cout << "recv data : " << recvbuff << endl;
 			int ret = send(_mSocket, recvbuff, strlen(recvbuff), 0);
-		}
+		}*/
 	}
 
 	_socketobj.CloseSocket();
@@ -81,13 +81,11 @@ void BaseServer::WorkerThread()
 	int recvlen;
 
 	while (recvlen = ::recv(_mSocket, recvbuff, MAX_BUFF, 0))
-	{
-		if (recvlen <= 0)
+	{		
+		if (recvlen > 0)
 		{
-			continue;
+			cout << "recv data : " << recvbuff << endl;
+			int ret = send(_mSocket, recvbuff, strlen(recvbuff), 0);
 		}
-
-		cout << "recv data : " << recvbuff << endl;
-		int ret = send(_mSocket, recvbuff, strlen(recvbuff), 0);
 	}
 }

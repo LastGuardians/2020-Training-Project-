@@ -1,5 +1,9 @@
 #include <iostream>
 #include <WinSock2.h>
+#include <thread>
+
+#include "GameClient.h"
+
 #pragma comment(lib, "ws2_32")
 
 #define SERVER_IP   "127.0.0.1"
@@ -8,59 +12,30 @@
 
 using namespace std;
 
-int main()
+void CommandConsole()
 {
-	WSADATA wsaData;
-	WSAStartup(MAKEWORD(2, 2), &wsaData);
-
-	SOCKET socketobj = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	if (INVALID_SOCKET == socketobj)
-	{
-		return -1;
-	}
-
-	SOCKADDR_IN listenAddr;
-	listenAddr.sin_family = AF_INET;
-	listenAddr.sin_port = htons(SERVER_PORT);
-	listenAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
-
-	int ret = connect(socketobj, (SOCKADDR*)&listenAddr, sizeof(listenAddr));
-	if (SOCKET_ERROR == ret)
-	{
-		cout << "connect() failed" << endl;
-		return -1;
-	}
-
-	cout << "connect success!" << endl;
+	GameClient client;
 
 	while (true)
 	{
-		char sendbuff[MAX_BUFF];
+		client.DoCommand();
 
-		cout << "보낼 메세지 입력 : ";
-		cin >> sendbuff;
-
-		int sendbyte = send(socketobj, sendbuff, sizeof(sendbuff), 0);
-		if (SOCKET_ERROR == sendbyte)
-		{
-			cout << "send data not exist." << endl;
-			break;
-		}
-
-		int recvlen;
-		if (recvlen = recv(socketobj, sendbuff, sizeof(sendbuff), 0))
-		{
-			if (SOCKET_ERROR == recvlen || 0 == recvlen)
-			{
-				cout << "recv data not exist." << endl;
-				continue;
-			}
-			cout << "받은 메세지 : " << sendbuff << endl;
-		}
 	}
+}
 
-	closesocket(socketobj);
-	WSACleanup();
+int main()
+{
+	GameClient client;
+	if (false == client.Connect())
+	{
+		return -1;
+	}
+	
+	std::thread CommandThread(&CommandConsole);
+	std::thread ReceiveThread(&GameClient::OnReceive, &client);
+
+	CommandThread.join();
+	ReceiveThread.join();
 
 	return 0;
 }
